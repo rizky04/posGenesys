@@ -14,7 +14,7 @@
 
                         <div><a class="" type="buttong" href="{{ route('barang.index') }}">BARANG</a></div>
                         <div><a class="" type="buttong" href="{{ route('transaction.index') }}">TRANSAKSI</a></div>
-                        <div><a class="" type="buttong" href="{{ route('barang.index') }}">LAPORAN</a></div>
+                        <div><a class="" type="buttong" href="">LAPORAN</a></div>
                     </div>
                 </div>
             </div>
