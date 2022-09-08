@@ -11,5 +11,6 @@ class Transaction extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [ 'faktur','id_barang', 'total', 'hargaSatuan', 'jumlah'];
+
     protected $dates = ['deleted_at'];
 }

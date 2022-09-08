@@ -10,6 +10,6 @@ class Barang extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillalble = ['nama', 'harga', 'stok'];
+    protected $fillable = ['nama', 'harga', 'stok'];
     protected $dates = ['deleted_at'];
 }

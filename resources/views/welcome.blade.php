@@ -9,7 +9,8 @@
 
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Styles -->
@@ -568,6 +569,24 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        //message with toastr
+        @if (session()->has('success'))
+
+            toastr.success('{{ session('success') }}', 'BERHASIL!');
+        @elseif (session()->has('error'))
+
+            toastr.error('{{ session('error') }}', 'GAGAL!');
+        @endif
+    </script>
+    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('content');
+    </script>
 </body>
 
 </html>

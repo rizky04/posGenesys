@@ -15,7 +15,7 @@ class BarangController extends Controller
     public function index()
     {
         //
-        $barang = Barang::all();
+        $barang = Barang::latest()->paginate(5);;
 
         return view('barang.index', compact('barang'));
     }
@@ -28,6 +28,7 @@ class BarangController extends Controller
     public function create()
     {
         //
+        return view('barang.create');
     }
 
     /**
@@ -39,6 +40,13 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         //
+        $data = Barang::create($request->all());
+
+        if($data){
+             return redirect()->route('barang.index')->with('success', 'data berhasil ditambah');
+        }else{
+            return view('barang.create');
+        }
     }
 
     /**
@@ -61,6 +69,7 @@ class BarangController extends Controller
     public function edit(Barang $barang)
     {
         //
+        return view('barang.edit', compact('barang'));
     }
 
     /**
@@ -73,6 +82,18 @@ class BarangController extends Controller
     public function update(Request $request, Barang $barang)
     {
         //
+        $barang->update([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'stok' => $request->stok
+        ]);
+
+        if ($barang) {
+            return redirect()->route('barang.index')->with('success', 'barang berhasil diupdate');
+        } else {
+            return view('barang.edit', compact('barang'));
+        }
+
     }
 
     /**
@@ -84,5 +105,14 @@ class BarangController extends Controller
     public function destroy(Barang $barang)
     {
         //
+        $barang->delete();
+
+        return redirect()->route('barang.index')->with('success', 'barang berhasil dihapus');
+    }
+
+    public function getBarang(Request $request){
+        $barang = Barang::where('id', $request->id)->first();
+
+        return response()->json($barang);
     }
 }

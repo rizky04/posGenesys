@@ -4,35 +4,85 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Laravel</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+    </style>
 
-    <!-- Scripts -->
-    {{-- <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script> --}}
-    @vite('resources/css/app.css')
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        @include('layouts.navigation')
+<body class="background: lightgray">
 
-        <!-- Page Heading -->
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card border-0 shadow rounded">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row m-md-3">
+                                <div class="col">
+                                    <a href="{{ route('barang.index') }}" type="button" class="btn btn-info">barang</a>
+                                    <a href="{{ route('transaction.index') }}" type="button"
+                                        class="btn btn-danger">transaksi</a>
+                                </div>
+                                <div class="col-7">
+
+                                </div>
+                                <div class="col">
+                                    <ul class="navbar-nav ml-auto">
+                                        <!-- Messages Dropdown Menu -->
+                                        <li class="nav-item dropdown">
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+
+                                                <x-dropdown-link :href="route('logout')" class="btn btn-sm btn-info"
+                                                    onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                                    {{ __('Log Out') }}
+                                                </x-dropdown-link>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        @yield('content')
+                    </div>
+                </div>
             </div>
-        </header>
-
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
+        </div>
     </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        //message with toastr
+        @if (session()->has('success'))
+
+            toastr.success('{{ session('success') }}', 'BERHASIL!');
+        @elseif (session()->has('error'))
+
+            toastr.error('{{ session('error') }}', 'GAGAL!');
+        @endif
+    </script>
+    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('content');
+    </script>
+
+
+
 </body>
 
 </html>
