@@ -6,7 +6,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
 
                     <div class="container">
-                        <form action="{{ route('transaction.store') }}" method="POST" id="form">
+                        <form action="{{ route('transactionBeli.store') }}" method="POST" id="form">
                             @csrf
                             <div class="form-row">
                                 <div class="col">
@@ -117,7 +117,7 @@
         $(document).on('blur', '#total', function() {
             let harga = parseInt($('#harga').val())
             let total = parseInt($(this).val())
-            let stok = parseInt($('#stok').val()) - total
+            let stok = parseInt($('#stok').val()) + total
 
             if (stok < 5) {
                 alert("stok kurang dari 5");

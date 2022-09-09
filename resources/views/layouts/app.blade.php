@@ -26,13 +26,15 @@
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
                         <div class="container">
-                            <div class="row m-md-3">
+                            <div class="row m-md-6">
                                 <div class="col">
                                     <a href="{{ route('barang.index') }}" type="button" class="btn btn-info">barang</a>
                                     <a href="{{ route('transaction.index') }}" type="button"
-                                        class="btn btn-danger">transaksi</a>
+                                        class="btn btn-primary">transaksi jual</a>
+                                    <a href="{{ route('transactionBeli.index') }}" type="button"
+                                        class="btn btn-warning">transaksi beli</a>
                                 </div>
-                                <div class="col-7">
+                                <div class="col-3">
 
                                 </div>
                                 <div class="col">

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Beli;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class TransactionController extends Controller
+class TransactionControllerBeli extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,21 +19,21 @@ class TransactionController extends Controller
     {
         //
         $barang = Barang::all();
-        $transaction = Transaction::latest()->paginate(5);
+        $transaction = Beli::latest()->paginate(5);
         $tanggal = Carbon::now()->format('Y-m-d');
         $now = Carbon::now();
         $thnBulan = $now->year . $now->month;
-        $cek = Transaction::count();
+        $cek = Beli::count();
         if ($cek == 0) {
             $urut = 10000001;
-            $nomer = 'NJ' . $thnBulan . $urut;
+            $nomer = 'NB' . $thnBulan . $urut;
         } else{
-            $ambil = Transaction::all()->last();
+            $ambil = Beli::all()->last();
             $urut = (int)substr($ambil->faktur, -8) + 1;
-            $nomer = 'NJ' . $thnBulan . $urut;
+            $nomer = 'NB' . $thnBulan . $urut;
         }
 
-        return view('transaksi.penjualan', compact('barang', 'nomer', 'transaction'));
+        return view('transaksi.pembelian', compact('barang', 'nomer', 'transaction'));
 
     }
 
@@ -63,7 +64,7 @@ class TransactionController extends Controller
                     'jumlah' => $request->jumlah
         ];
 
-        $transaksi = Transaction::create($transaction);
+        $transaksi = Beli::create($transaction);
 
         if($transaksi){
             $barang = Barang::where('id', $request->id_barang)->first();

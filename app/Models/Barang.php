@@ -12,4 +12,12 @@ class Barang extends Model
 
     protected $fillable = ['nama', 'harga', 'stok'];
     protected $dates = ['deleted_at'];
+
+    public function transaction(){
+        return $this->hasMany(Transaction::class, 'id_barang', 'id');
+    }
+    public function beli(){
+        return $this->hasMany(Beli::class, 'id_barang', 'id');
+    }
+
 }

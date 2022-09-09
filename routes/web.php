@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionControllerBeli;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,7 @@ Route::get('/', function () {
 
 Route::resource('barang', BarangController::class);
 Route::resource('transaction', TransactionController::class);
+Route::resource('transactionBeli', TransactionControllerBeli::class);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
